@@ -2,7 +2,6 @@
 /****************************************BINARY HEADER CLASS*************************************************/
 /***************************Create object to read Binary Header of a SEG-Y file******************************/
 
-//Class to create object to read Binary Header of SEG-Y file
 class BinaryHeader
 {
 private:
@@ -42,19 +41,20 @@ private:
 
 public:
 
-  void store(char* arr);
-  void write(ofstream& out);
-  friend short int readvalue(char a, char b);
-  friend int readvalue(char a, char b, char c, char d);
-  friend ostream& operator << (ostream& s, BinaryHeader& b);
+  void store(char* );
+  void write(ofstream& );
+  friend short int readvalue_si(char*, int);
+  friend int readvalue_i(char*, int);
+  friend void readvalue_c(char*, char*, int, int);
+  friend ostream& operator << (ostream& , BinaryHeader& );
 };
 
-/* MEMBER FUNCTIONS */
+/*****************************************MEMBER FUNCTIONS***************************************************/
 
 //Write Object to text file
-void BinaryHeader :: write(ofstream& out)
+void BinaryHeader :: write(ofstream& out_)
 {
-  out << *this;
+  out_ << *this;
 }
 
 //Store the values read to corresponding attribute of object
@@ -93,36 +93,37 @@ void BinaryHeader :: store(char* arr)
 }
 
 //Overload the stream << operator to write BINARY HEADER objects directly to file
-ostream& operator << (ostream& s, BinaryHeader& b)
+ostream& operator << (ostream& out_, BinaryHeader& binaryHeader_)
 {
-  s << "JOB_ID                :" << b.JOB_ID<< endl ;
-  s << "LINE_NUM              :" << b.LINE_NUM<< endl ;
-  s << "REEL_NUM              :" << b.REEL_NUM<< endl ;
-  s << "NUM_OF_TRACE          :" << b.NUM_OF_TRACE<< endl ;
-  s << "NUM_OF_AUX            :" << b.NUM_OF_AUX<< endl ;
-  s << "INTERVAL_M            :" << b.INTERVAL_MS << endl ;
-  s << "INTERVAL_MS_ORI       :" << b.INTERVAL_MS_ORI << endl ;
-  s << "NUM_OF_SAMPLES_ORI    :" << b.NUM_OF_SAMPLES_ORI<< endl ;
-  s << "SAMPLE_FORMAT         :" << b.SAMPLE_FORMAT << endl ;
-  s << "ENSEMBLE              :" << b.ENSEMBLE<< endl ;
-  s << "TRACE_SORT            :" << b.TRACE_SORT<< endl ;
-  s << "VERT_SUM              :" << b.VERT_SUM<< endl ;
-  s << "SWEEP_FREQ_START      :" << b.SWEEP_FREQ_START<< endl ;
-  s << "SWEEP_FREQ_END        :" << b.SWEEP_FREQ_END<< endl ;
-  s << "SWEEP_LENGTH          :" << b.SWEEP_LENGTH<< endl ;
-  s << "SWEEP_TYPE            :" << b.SWEEP_TYPE<< endl ;
-  s << "SWEEP_NUM_CHANNEL     :" << b.SWEEP_NUM_CHANNEL << endl ;
-  s << "SWEEP_TAPER_LEN_START :" << b.SWEEP_TAPER_LEN_START << endl ;
-  s << "SWEEP_TAPER_LEN_END   :" << b.SWEEP_TAPER_LEN_END << endl ;
-  s << "TAPER_TYPE            :" << b.TAPER_TYPE<< endl ;
-  s << "CORRELATED            :" << b.CORRELATED<< endl ;
-  s << "BINARY_GAIN           :" << b.BINARY_GAIN << endl ;
-  s << "AMP_RECOR             :" << b.AMP_RECOR << endl ;
-  s << "MEASURE_SYSTEM        :" << b.MEASURE_SYSTEM<< endl ;
-  s << "IMPULSE_POLAR         :" << b.IMPULSE_POLAR << endl ;
-  s << "POLAR_CODE            :" << b.POLAR_CODE<< endl ;
-  s << "SEGY_REV_NUM          :" << b.SEGY_REV_NUM<< endl ;
-  s << "FIXED_LEN             :" << b.FIXED_LEN << endl ;
-  s << "NUM_EXT_HEAD          :" << b.NUM_EXT_HEAD<< endl ;
-  return s;
+  out_ << "JOB_ID                :" << binaryHeader_.JOB_ID                << endl ;
+  out_ << "LINE_NUM              :" << binaryHeader_.LINE_NUM              << endl ;
+  out_ << "REEL_NUM              :" << binaryHeader_.REEL_NUM              << endl ;
+  out_ << "NUM_OF_TRACE          :" << binaryHeader_.NUM_OF_TRACE          << endl ;
+  out_ << "NUM_OF_AUX            :" << binaryHeader_.NUM_OF_AUX            << endl ;
+  out_ << "INTERVAL_M            :" << binaryHeader_.INTERVAL_MS           << endl ;
+  out_ << "INTERVAL_MS_ORI       :" << binaryHeader_.INTERVAL_MS_ORI       << endl ;
+  out_ << "NUM_OF_SAMPLES_ORI    :" << binaryHeader_.NUM_OF_SAMPLES_ORI    << endl ;
+  out_ << "SAMPLE_FORMAT         :" << binaryHeader_.SAMPLE_FORMAT         << endl ;
+  out_ << "ENSEMBLE              :" << binaryHeader_.ENSEMBLE              << endl ;
+  out_ << "TRACE_SORT            :" << binaryHeader_.TRACE_SORT            << endl ;
+  out_ << "VERT_SUM              :" << binaryHeader_.VERT_SUM              << endl ;
+  out_ << "SWEEP_FREQ_START      :" << binaryHeader_.SWEEP_FREQ_START      << endl ;
+  out_ << "SWEEP_FREQ_END        :" << binaryHeader_.SWEEP_FREQ_END        << endl ;
+  out_ << "SWEEP_LENGTH          :" << binaryHeader_.SWEEP_LENGTH          << endl ;
+  out_ << "SWEEP_TYPE            :" << binaryHeader_.SWEEP_TYPE            << endl ;
+  out_ << "SWEEP_NUM_CHANNEL     :" << binaryHeader_.SWEEP_NUM_CHANNEL     << endl ;
+  out_ << "SWEEP_TAPER_LEN_START :" << binaryHeader_.SWEEP_TAPER_LEN_START << endl ;
+  out_ << "SWEEP_TAPER_LEN_END   :" << binaryHeader_.SWEEP_TAPER_LEN_END   << endl ;
+  out_ << "TAPER_TYPE            :" << binaryHeader_.TAPER_TYPE            << endl ;
+  out_ << "CORRELATED            :" << binaryHeader_.CORRELATED            << endl ;
+  out_ << "BINARY_GAIN           :" << binaryHeader_.BINARY_GAIN           << endl ;
+  out_ << "AMP_RECOR             :" << binaryHeader_.AMP_RECOR             << endl ;
+  out_ << "MEASURE_SYSTEM        :" << binaryHeader_.MEASURE_SYSTEM        << endl ;
+  out_ << "IMPULSE_POLAR         :" << binaryHeader_.IMPULSE_POLAR         << endl ;
+  out_ << "POLAR_CODE            :" << binaryHeader_.POLAR_CODE            << endl ;
+  out_ << "SEGY_REV_NUM          :" << binaryHeader_.SEGY_REV_NUM          << endl ;
+  out_ << "FIXED_LEN             :" << binaryHeader_.FIXED_LEN             << endl ;
+  out_ << "NUM_EXT_HEAD          :" << binaryHeader_.NUM_EXT_HEAD          << endl ;
+  
+  return out_;
 }

@@ -95,21 +95,21 @@ private:
 
 public:
 
-  void store(char* arr);
-  void write(ofstream& out);
-  friend void write(ofstream& out);
+  void store(char* );
+  void write(ofstream& );
+  friend void write(ofstream& );
   friend short int readvalue_si(char*, int);
   friend int readvalue_i(char*, int);
   friend void readvalue_c(char*, char*, int, int);
-  friend ostream& operator << (ostream& s, TraceHeader& b);
+  friend ostream& operator << (ostream& , TraceHeader& );
 
 };
 
 /*****************************************MEMBER FUNCTIONS***************************************************/
 
-void TraceHeader :: write(ofstream& out)
+void TraceHeader :: write(ofstream& out_)
 {
-  out << *this;
+  out_ << *this;
 }
 
 
@@ -205,95 +205,95 @@ void TraceHeader :: store(char* arr)
 }
 
 //Overload the stream << operator to write TRACE HEADER objects directly to file
-ostream& operator << (ostream& s, TraceHeader& traceHeader_)
+ostream& operator << (ostream& out_, TraceHeader& traceHeader_)
 {
-  s << "TRACE_SEQ_GLOBAL      : " <<  traceHeader_.TRACE_SEQ_GLOBAL       << endl ;
-  s << "TRACE_SEQ_LOCAL       : " <<  traceHeader_.TRACE_SEQ_LOCAL        << endl ;
-  s << "ORI_RECORD_NUM        : " <<  traceHeader_.ORI_RECORD_NUM         << endl ;
-  s << "TRACE_NUM_FIELD       : " <<  traceHeader_.TRACE_NUM_FIELD        << endl ;
-  s << "SOURCE_POINT          : " <<  traceHeader_.SOURCE_POINT           << endl ;
-  s << "ENSEMBLE_NUM          : " <<  traceHeader_.ENSEMBLE_NUM           << endl ;
-  s << "ENS_TRACE_NUM         : " <<  traceHeader_.ENS_TRACE_NUM          << endl ;
-  s << "TRACE_CODE            : " <<  traceHeader_.TRACE_CODE             << endl ;
-  s << "NUM_VERT_SUM          : " <<  traceHeader_.NUM_VERT_SUM           << endl ;
-  s << "NUM_HORZ_SUM          : " <<  traceHeader_.NUM_HORZ_SUM           << endl ;
-  s << "DATA_USE              : " <<  traceHeader_.DATA_USE               << endl ;
-  s << "DIST_CENT_RECV        : " <<  traceHeader_.DIST_CENT_RECV         << endl ;
-  s << "RECV_GRP_ELEV         : " <<  traceHeader_.RECV_GRP_ELEV          << endl ;
-  s << "SURF_ELEV_SRC         : " <<  traceHeader_.SURF_ELEV_SRC          << endl ;
-  s << "SOURCE_DEPTH          : " <<  traceHeader_.SOURCE_DEPTH           << endl ;
-  s << "DATUM_ELEV_RECV       : " <<  traceHeader_.DATUM_ELEV_RECV        << endl ;
-  s << "DATUM_ELAV_SRC        : " <<  traceHeader_.DATUM_ELAV_SRC         << endl ;
-  s << "WATER_DEPTH_SRC       : " <<  traceHeader_.WATER_DEPTH_SRC        << endl ;
-  s << "WATER_DEPTH_GRP       : " <<  traceHeader_.WATER_DEPTH_GRP        << endl ;
-  s << "SCALE_DEPTH           : " <<  traceHeader_.SCALE_DEPTH            << endl ;
-  s << "SCALE_COOR            : " <<  traceHeader_.SCALE_COOR             << endl ;
-  s << "SRC_COOR_X            : " <<  traceHeader_.SRC_COOR_X             << endl ;
-  s << "SRC_COOR_Y            : " <<  traceHeader_.SRC_COOR_Y             << endl ;
-  s << "GRP_COOR_X            : " <<  traceHeader_.GRP_COOR_X             << endl ;
-  s << "GRP_COOR_Y            : " <<  traceHeader_.GRP_COOR_Y             << endl ;
-  s << "COOR_UNIT             : " <<  traceHeader_.COOR_UNIT              << endl ;
-  s << "WEATHER_VEL           : " <<  traceHeader_.WEATHER_VEL            << endl ;
-  s << "SWEATHER_VEL          : " <<  traceHeader_.SWEATHER_VEL           << endl ;
-  s << "UPHOLE_T_SRC          : " <<  traceHeader_.UPHOLE_T_SRC           << endl ;
-  s << "UPHOLE_T_GRP          : " <<  traceHeader_.UPHOLE_T_GRP           << endl ;
-  s << "SRC_STA_CORRC         : " <<  traceHeader_.SRC_STA_CORRC          << endl ;
-  s << "GRP_STA_CORRC         : " <<  traceHeader_.GRP_STA_CORRC          << endl ;
-  s << "TOTAL_STA             : " <<  traceHeader_.TOTAL_STA              << endl ;
-  s << "LAG_TIME_A            : " <<  traceHeader_.LAG_TIME_A             << endl ;
-  s << "LAG_TIME_B            : " <<  traceHeader_.LAG_TIME_B             << endl ;
-  s << "DELAY_T               : " <<  traceHeader_.DELAY_T                << endl ;
-  s << "MUTE_T_STRT           : " <<  traceHeader_.MUTE_T_STRT            << endl ;
-  s << "MUTE_T_END            : " <<  traceHeader_.MUTE_T_END             << endl ;
-  s << "NUM_OF_SAMPL          : " <<  traceHeader_.NUM_OF_SAMPL           << endl ;
-  s << "SAMPLE_INTRVL         : " <<  traceHeader_.SAMPLE_INTRVL          << endl ;
-  s << "GAIN_TYPE             : " <<  traceHeader_.GAIN_TYPE              << endl ;
-  s << "GAIN_CONST            : " <<  traceHeader_.GAIN_CONST             << endl ;
-  s << "GAIN_INIT             : " <<  traceHeader_.GAIN_INIT              << endl ;
-  s << "CORRLTD               : " <<  traceHeader_.CORRLTD                << endl ;
-  s << "SWEEP_FREQ_START      : " <<  traceHeader_.SWEEP_FREQ_START       << endl ;
-  s << "SWEEP_FREQ_END        : " <<  traceHeader_.SWEEP_FREQ_END         << endl ;
-  s << "SWEEP_LENGTH          : " <<  traceHeader_.SWEEP_LENGTH           << endl ;
-  s << "SWEEP_TYPE            : " <<  traceHeader_.SWEEP_TYPE             << endl ;
-  s << "SWEEP_TAPER_LEN_START : " <<  traceHeader_.SWEEP_TAPER_LEN_START  << endl ;
-  s << "SWEEP_TAPER_LEN_END   : " <<  traceHeader_.SWEEP_TAPER_LEN_END    << endl ;
-  s << "TAPER_TYPE            : " <<  traceHeader_.TAPER_TYPE             << endl ;
-  s << "ALIAS_FREQ            : " <<  traceHeader_.ALIAS_FREQ             << endl ;
-  s << "ALIAS_SLOPE           : " <<  traceHeader_.ALIAS_SLOPE            << endl ;
-  s << "NOTCH_FREQ            : " <<  traceHeader_.NOTCH_FREQ             << endl ;
-  s << "NOTCH_SLOPE           : " <<  traceHeader_.NOTCH_SLOPE            << endl ;
-  s << "LOWCUT_FREQ           : " <<  traceHeader_.LOWCUT_FREQ            << endl ;
-  s << "HIGHCUT_FREQ          : " <<  traceHeader_.HIGHCUT_FREQ           << endl ;
-  s << "LOWCUT_SLOPE          : " <<  traceHeader_.LOWCUT_SLOPE           << endl ;
-  s << "HIGHCUT_SLOPE         : " <<  traceHeader_.HIGHCUT_SLOPE          << endl ;
-  s << "YEAR                  : " <<  traceHeader_.YEAR                   << endl ;
-  s << "DAY                   : " <<  traceHeader_.DAY                    << endl ;
-  s << "HOUR                  : " <<  traceHeader_.HOUR                   << endl ;
-  s << "MINUTE                : " <<  traceHeader_.MINUTE                 << endl ;
-  s << "SECOND                : " <<  traceHeader_.SECOND                 << endl ;
-  s << "TIME_CODE             : " <<  traceHeader_.TIME_CODE              << endl ;
-  s << "WEIGHT_FACT           : " <<  traceHeader_.WEIGHT_FACT            << endl ;
-  s << "GEOPHNE_ROLL          : " <<  traceHeader_.GEOPHNE_ROLL           << endl ;
-  s << "GEOPHNE_TRACE         : " <<  traceHeader_.GEOPHNE_TRACE          << endl ;
-  s << "GEOPHNE_LAST          : " <<  traceHeader_.GEOPHNE_LAST           << endl ;
-  s << "GAP_SIZE              : " <<  traceHeader_.GAP_SIZE               << endl ;
-  s << "OVER_TRAVEL           : " <<  traceHeader_.OVER_TRAVEL            << endl ;
-  s << "ENS_COOR_X            : " <<  traceHeader_.ENS_COOR_X             << endl ;
-  s << "ENS_COOR_Y            : " <<  traceHeader_.ENS_COOR_Y             << endl ;
-  s << "INLINE                : " <<  traceHeader_.INLINE                 << endl ;
-  s << "CROSS                 : " <<  traceHeader_.CROSS                  << endl ;
-  s << "SHOOTPOINT            : " <<  traceHeader_.SHOOTPOINT             << endl ;
-  s << "SHOOTPOINT_SCALE      : " <<  traceHeader_.SHOOTPOINT_SCALE       << endl ;
-  s << "TRACE_UNIT            : " <<  traceHeader_.TRACE_UNIT             << endl ;
-  s << "TRANSD_UNIT           : " <<  traceHeader_.TRANSD_UNIT            << endl ;
-  s << "TRACE_IDENT           : " <<  traceHeader_.TRACE_IDENT            << endl ;
-  s << "SCALE_TIME            : " <<  traceHeader_.SCALE_TIME             << endl ;
-  s << "SRC_ORIENT            : " <<  traceHeader_.SRC_ORIENT             << endl ;
-  s << "SRC_UNIT              : " <<  traceHeader_.SRC_UNIT               << endl ;
-  s << "UNASSIGNED1           : " <<  traceHeader_.UNNASSIGNED1           << endl ;
-  s << "TRANSD_CONST          : " <<  traceHeader_.TRANSD_CONST           << endl ;
-  s << "SRC_DIRECTION         : " <<  traceHeader_.SRC_DIRECTION          << endl ;
-  s << "SRC_MEASUREMT         : " <<  traceHeader_.SRC_MEASUREMT          << endl ;
+  out_ << "TRACE_SEQ_GLOBAL      : " <<  traceHeader_.TRACE_SEQ_GLOBAL       << endl ;
+  out_ << "TRACE_SEQ_LOCAL       : " <<  traceHeader_.TRACE_SEQ_LOCAL        << endl ;
+  out_ << "ORI_RECORD_NUM        : " <<  traceHeader_.ORI_RECORD_NUM         << endl ;
+  out_ << "TRACE_NUM_FIELD       : " <<  traceHeader_.TRACE_NUM_FIELD        << endl ;
+  out_ << "SOURCE_POINT          : " <<  traceHeader_.SOURCE_POINT           << endl ;
+  out_ << "ENSEMBLE_NUM          : " <<  traceHeader_.ENSEMBLE_NUM           << endl ;
+  out_ << "ENS_TRACE_NUM         : " <<  traceHeader_.ENS_TRACE_NUM          << endl ;
+  out_ << "TRACE_CODE            : " <<  traceHeader_.TRACE_CODE             << endl ;
+  out_ << "NUM_VERT_SUM          : " <<  traceHeader_.NUM_VERT_SUM           << endl ;
+  out_ << "NUM_HORZ_SUM          : " <<  traceHeader_.NUM_HORZ_SUM           << endl ;
+  out_ << "DATA_USE              : " <<  traceHeader_.DATA_USE               << endl ;
+  out_ << "DIST_CENT_RECV        : " <<  traceHeader_.DIST_CENT_RECV         << endl ;
+  out_ << "RECV_GRP_ELEV         : " <<  traceHeader_.RECV_GRP_ELEV          << endl ;
+  out_ << "SURF_ELEV_SRC         : " <<  traceHeader_.SURF_ELEV_SRC          << endl ;
+  out_ << "SOURCE_DEPTH          : " <<  traceHeader_.SOURCE_DEPTH           << endl ;
+  out_ << "DATUM_ELEV_RECV       : " <<  traceHeader_.DATUM_ELEV_RECV        << endl ;
+  out_ << "DATUM_ELAV_SRC        : " <<  traceHeader_.DATUM_ELAV_SRC         << endl ;
+  out_ << "WATER_DEPTH_SRC       : " <<  traceHeader_.WATER_DEPTH_SRC        << endl ;
+  out_ << "WATER_DEPTH_GRP       : " <<  traceHeader_.WATER_DEPTH_GRP        << endl ;
+  out_ << "SCALE_DEPTH           : " <<  traceHeader_.SCALE_DEPTH            << endl ;
+  out_ << "SCALE_COOR            : " <<  traceHeader_.SCALE_COOR             << endl ;
+  out_ << "SRC_COOR_X            : " <<  traceHeader_.SRC_COOR_X             << endl ;
+  out_ << "SRC_COOR_Y            : " <<  traceHeader_.SRC_COOR_Y             << endl ;
+  out_ << "GRP_COOR_X            : " <<  traceHeader_.GRP_COOR_X             << endl ;
+  out_ << "GRP_COOR_Y            : " <<  traceHeader_.GRP_COOR_Y             << endl ;
+  out_ << "COOR_UNIT             : " <<  traceHeader_.COOR_UNIT              << endl ;
+  out_ << "WEATHER_VEL           : " <<  traceHeader_.WEATHER_VEL            << endl ;
+  out_ << "SWEATHER_VEL          : " <<  traceHeader_.SWEATHER_VEL           << endl ;
+  out_ << "UPHOLE_T_SRC          : " <<  traceHeader_.UPHOLE_T_SRC           << endl ;
+  out_ << "UPHOLE_T_GRP          : " <<  traceHeader_.UPHOLE_T_GRP           << endl ;
+  out_ << "SRC_STA_CORRC         : " <<  traceHeader_.SRC_STA_CORRC          << endl ;
+  out_ << "GRP_STA_CORRC         : " <<  traceHeader_.GRP_STA_CORRC          << endl ;
+  out_ << "TOTAL_STA             : " <<  traceHeader_.TOTAL_STA              << endl ;
+  out_ << "LAG_TIME_A            : " <<  traceHeader_.LAG_TIME_A             << endl ;
+  out_ << "LAG_TIME_B            : " <<  traceHeader_.LAG_TIME_B             << endl ;
+  out_ << "DELAY_T               : " <<  traceHeader_.DELAY_T                << endl ;
+  out_ << "MUTE_T_STRT           : " <<  traceHeader_.MUTE_T_STRT            << endl ;
+  out_ << "MUTE_T_END            : " <<  traceHeader_.MUTE_T_END             << endl ;
+  out_ << "NUM_OF_SAMPL          : " <<  traceHeader_.NUM_OF_SAMPL           << endl ;
+  out_ << "SAMPLE_INTRVL         : " <<  traceHeader_.SAMPLE_INTRVL          << endl ;
+  out_ << "GAIN_TYPE             : " <<  traceHeader_.GAIN_TYPE              << endl ;
+  out_ << "GAIN_CONST            : " <<  traceHeader_.GAIN_CONST             << endl ;
+  out_ << "GAIN_INIT             : " <<  traceHeader_.GAIN_INIT              << endl ;
+  out_ << "CORRLTD               : " <<  traceHeader_.CORRLTD                << endl ;
+  out_ << "SWEEP_FREQ_START      : " <<  traceHeader_.SWEEP_FREQ_START       << endl ;
+  out_ << "SWEEP_FREQ_END        : " <<  traceHeader_.SWEEP_FREQ_END         << endl ;
+  out_ << "SWEEP_LENGTH          : " <<  traceHeader_.SWEEP_LENGTH           << endl ;
+  out_ << "SWEEP_TYPE            : " <<  traceHeader_.SWEEP_TYPE             << endl ;
+  out_ << "SWEEP_TAPER_LEN_START : " <<  traceHeader_.SWEEP_TAPER_LEN_START  << endl ;
+  out_ << "SWEEP_TAPER_LEN_END   : " <<  traceHeader_.SWEEP_TAPER_LEN_END    << endl ;
+  out_ << "TAPER_TYPE            : " <<  traceHeader_.TAPER_TYPE             << endl ;
+  out_ << "ALIAS_FREQ            : " <<  traceHeader_.ALIAS_FREQ             << endl ;
+  out_ << "ALIAS_SLOPE           : " <<  traceHeader_.ALIAS_SLOPE            << endl ;
+  out_ << "NOTCH_FREQ            : " <<  traceHeader_.NOTCH_FREQ             << endl ;
+  out_ << "NOTCH_SLOPE           : " <<  traceHeader_.NOTCH_SLOPE            << endl ;
+  out_ << "LOWCUT_FREQ           : " <<  traceHeader_.LOWCUT_FREQ            << endl ;
+  out_ << "HIGHCUT_FREQ          : " <<  traceHeader_.HIGHCUT_FREQ           << endl ;
+  out_ << "LOWCUT_SLOPE          : " <<  traceHeader_.LOWCUT_SLOPE           << endl ;
+  out_ << "HIGHCUT_SLOPE         : " <<  traceHeader_.HIGHCUT_SLOPE          << endl ;
+  out_ << "YEAR                  : " <<  traceHeader_.YEAR                   << endl ;
+  out_ << "DAY                   : " <<  traceHeader_.DAY                    << endl ;
+  out_ << "HOUR                  : " <<  traceHeader_.HOUR                   << endl ;
+  out_ << "MINUTE                : " <<  traceHeader_.MINUTE                 << endl ;
+  out_ << "SECOND                : " <<  traceHeader_.SECOND                 << endl ;
+  out_ << "TIME_CODE             : " <<  traceHeader_.TIME_CODE              << endl ;
+  out_ << "WEIGHT_FACT           : " <<  traceHeader_.WEIGHT_FACT            << endl ;
+  out_ << "GEOPHNE_ROLL          : " <<  traceHeader_.GEOPHNE_ROLL           << endl ;
+  out_ << "GEOPHNE_TRACE         : " <<  traceHeader_.GEOPHNE_TRACE          << endl ;
+  out_ << "GEOPHNE_LAST          : " <<  traceHeader_.GEOPHNE_LAST           << endl ;
+  out_ << "GAP_SIZE              : " <<  traceHeader_.GAP_SIZE               << endl ;
+  out_ << "OVER_TRAVEL           : " <<  traceHeader_.OVER_TRAVEL            << endl ;
+  out_ << "ENS_COOR_X            : " <<  traceHeader_.ENS_COOR_X             << endl ;
+  out_ << "ENS_COOR_Y            : " <<  traceHeader_.ENS_COOR_Y             << endl ;
+  out_ << "INLINE                : " <<  traceHeader_.INLINE                 << endl ;
+  out_ << "CROSS                 : " <<  traceHeader_.CROSS                  << endl ;
+  out_ << "SHOOTPOINT            : " <<  traceHeader_.SHOOTPOINT             << endl ;
+  out_ << "SHOOTPOINT_SCALE      : " <<  traceHeader_.SHOOTPOINT_SCALE       << endl ;
+  out_ << "TRACE_UNIT            : " <<  traceHeader_.TRACE_UNIT             << endl ;
+  out_ << "TRANSD_UNIT           : " <<  traceHeader_.TRANSD_UNIT            << endl ;
+  out_ << "TRACE_IDENT           : " <<  traceHeader_.TRACE_IDENT            << endl ;
+  out_ << "SCALE_TIME            : " <<  traceHeader_.SCALE_TIME             << endl ;
+  out_ << "SRC_ORIENT            : " <<  traceHeader_.SRC_ORIENT             << endl ;
+  out_ << "SRC_UNIT              : " <<  traceHeader_.SRC_UNIT               << endl ;
+  out_ << "UNASSIGNED1           : " <<  traceHeader_.UNNASSIGNED1           << endl ;
+  out_ << "TRANSD_CONST          : " <<  traceHeader_.TRANSD_CONST           << endl ;
+  out_ << "SRC_DIRECTION         : " <<  traceHeader_.SRC_DIRECTION          << endl ;
+  out_ << "SRC_MEASUREMT         : " <<  traceHeader_.SRC_MEASUREMT          << endl ;
 
-  return s;
+  return out_;
 }
