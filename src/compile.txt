@@ -1,0 +1,2 @@
+g++ -o connection -I/usr/local/include -I/usr/local/include/cppconn connection.cpp -lmysqlcppconn
+
