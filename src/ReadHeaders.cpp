@@ -79,6 +79,19 @@ int main(int argc, char* argv[])
 	//free memory
 	delete binData;
 
+    //....TODO READ EXT TEXT HEADER
+    //Crrently skipped
+    if (bHeader.NUM_EXT_HEAD == -1)
+    {
+    	cout << "\nVariable number of Extended Textual File Header records"
+    	     << "\n....Exiting";
+    	exit(-6);
+    }
+    else if (bHeader.NUM_EXT_HEAD >= 0)
+    {
+    	seg.seekg(bHeader.NUM_EXT_HEAD * 3200);
+    }
+
     //Allocate memory for TraceHeader
 	char* trcData;
 	trcData = new char[240];
