@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 	//ensure proper usage
 	if (argc != 5)
 	{
-		cout << "Usage: [./ReadHeaders filename.sgy outputfile1.txt outputfile2.txt outputfile3.txt]";
+		cout << "Usage: [./ReadHeaders filename.sgy outputfile1.txt outputfile2.txt outputfile3.csv]";
 		exit(-1);
 	}
 
@@ -79,17 +79,23 @@ int main(int argc, char* argv[])
 	//free memory
 	delete binData;
 
+    //Allocate memory for TraceHeader
 	char* trcData;
 	trcData = new char[240];
 	seg.read(trcData, 240);
 
+    //Create TraceHeader object
 	TraceHeader trcHeader;
 	trcHeader.store(trcData);
+	//Write object to file
 	trcHeader.write(out_trc);
+    //free memory
+    delete trcData;
 
 	//close the open files
 	out_txt.close();
 	out_bin.close();
+	out_trc.close();
 	seg.close();
 
 	//Program successfully executed
