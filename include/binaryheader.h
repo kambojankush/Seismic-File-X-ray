@@ -42,6 +42,7 @@ private:
 public:
 
   void store(char* );
+  short int get_exthead(void);
   void write(ofstream& );
   friend short int readvalue_si(char*, int);
   friend int readvalue_i(char*, int);
@@ -51,6 +52,11 @@ public:
 
 /*****************************************MEMBER FUNCTIONS***************************************************/
 
+
+short int BinaryHeader :: get_exthead(void)
+{
+    return NUM_EXT_HEAD;
+}
 //Write Object to text file
 void BinaryHeader :: write(ofstream& out_)
 {

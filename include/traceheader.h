@@ -97,6 +97,7 @@ public:
 
   void store(char* );
   void write(ofstream& );
+  unsigned short int get_numsampl(void);
   friend void write(ofstream& );
   friend short int readvalue_si(char*, int);
   friend int readvalue_i(char*, int);
@@ -106,6 +107,11 @@ public:
 };
 
 /*****************************************MEMBER FUNCTIONS***************************************************/
+
+unsigned short int TraceHeader :: get_numsampl(void)
+{
+  return NUM_OF_SAMPL;
+}
 
 void TraceHeader :: write(ofstream& out_)
 {

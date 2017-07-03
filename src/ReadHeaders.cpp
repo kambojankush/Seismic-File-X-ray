@@ -81,30 +81,33 @@ int main(int argc, char* argv[])
 
     //....TODO READ EXT TEXT HEADER
     //Crrently skipped
-    if (bHeader.NUM_EXT_HEAD == -1)
-    {
-    	cout << "\nVariable number of Extended Textual File Header records"
-    	     << "\n....Exiting";
-    	exit(-6);
-    }
-    else if (bHeader.NUM_EXT_HEAD >= 0)
-    {
-    	seg.seekg(bHeader.NUM_EXT_HEAD * 3200);
-    }
-
-    //Allocate memory for TraceHeader
-	char* trcData;
-	trcData = new char[240];
-	seg.read(trcData, 240);
-
+    /*short int num_ext_head = bHeader.get_exthead();
+    */
+    //for testing 2
+    // Calculated from text header
+    int no_of_traces = 2;
     //Create TraceHeader object
 	TraceHeader trcHeader;
-	trcHeader.store(trcData);
-	//Write object to file
-	trcHeader.write(out_trc);
-    //free memory
-    delete trcData;
 
+    for(int i = 0; i < no_of_traces; i++)
+    {
+        //Allocate memory for TraceHeader
+	    char* trcData;
+	    trcData = new char[240];
+	    seg.read(trcData, 240);
+
+        
+	    trcHeader.store(trcData);
+	    //Write object to file
+	    trcHeader.write(out_trc);
+        //free memory
+        delete trcData;
+    
+        //Sample data will be according to as def in binary header
+        //using 4 for test file
+        unsigned short int num_of_sampl = trcHeader.get_numsampl();
+        seg.seekg(num_of_sampl * 4, ios::cur);
+    }
 	//close the open files
 	out_txt.close();
 	out_bin.close();
