@@ -12,22 +12,23 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	//ensure proper usage
-	if (argc != 5)
+	if (argc != 6)
 	{
-		cout << "Usage: [./ReadHeaders filename.sgy outputfile1.txt outputfile2.txt outputfile3.csv]";
+		cout << "Usage: [./ReadHeaders filename.sgy {textheader}.txt {binaryheader}.txt {extendedtextheader}.txt {traceheader}.csv]";
 		exit(-1);
 	}
 
 	//create ifstream object
 	ifstream seg;
 	//create ofstream objects
-	ofstream out_txt, out_bin, out_trc;
+	ofstream out_txt, out_bin, out_exttxt, out_trc;
 
 	//open files
 	seg.open(argv[1], ios::binary);
 	out_txt.open(argv[2], ios::trunc);
 	out_bin.open(argv[3], ios::trunc);
-	out_trc.open(argv[4], ios::trunc);
+	out_exttxt.open(argv[4], ios::trunc);
+	out_trc.open(argv[5], ios::trunc);
 
 	//error checking
 	if (!seg)
@@ -45,10 +46,15 @@ int main(int argc, char* argv[])
 		cerr << "Can't open file " << argv[3];
 		exit(-4);
 	}
-	if (!out_trc)
+	if (!out_exttxt)
 	{
 		cerr << "Can't open file " << argv[4];
 		exit(-5);
+	}
+	if (!out_trc)
+	{
+		cerr << "Can't open file " << argv[5];
+		exit(-6);
 	}
 	//Display file status
 	printfilestatus(seg);
@@ -80,12 +86,37 @@ int main(int argc, char* argv[])
 	delete binData;
 
     //....TODO READ EXT TEXT HEADER
-    //Crrently skipped
-    /*short int num_ext_head = bHeader.get_exthead();
-    */
-    //for testing 2
+    //Crrently untested
+    short int num_ext_head = bHeader.get_exthead();
+    if (num_ext_head == -1)
+    {
+    	cout << "\nvariable number of Extended Textual File Header records";
+    	out_exttxt.close();
+    }
+    else if (num_ext_head == 0)
+    {
+        cout <<"\nno Extended Textual Binary Header";
+        out_exttxt.close();
+    }
+    else
+    {
+    	while(num_ext_head--)
+    	{
+	        char* exttxtHeader = NULL;
+	        exttxtHeader = new char[3200];
+
+	        //Read, covert and write Extended Textual Header
+	        seg.read(exttxtHeader,3200);
+	        //convertASCII(exttxtHeader,3200);
+	        write_text_header(out_exttxt,txtHeader);
+	        // free memory
+	        delete txtHeader;    	    	
+    	}
+    }
+    
+    //for testing 4
     // Calculated from text header
-    int no_of_traces = 2;
+    int no_of_traces = 4;
     //Create TraceHeader object
 	TraceHeader trcHeader;
 
