@@ -301,8 +301,6 @@ ostream& operator << (ostream& out_, TraceHeader& traceHeader_)
   out_ << traceHeader_.SRC_UNIT               << "," ;
   out_ << traceHeader_.UNNASSIGNED1           << "," ;
 
-
-
   out_ << endl;
 
   return out_;
