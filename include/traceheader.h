@@ -291,15 +291,17 @@ ostream& operator << (ostream& out_, TraceHeader& traceHeader_)
   out_ << traceHeader_.SHOOTPOINT             << "," ;
   out_ << traceHeader_.SHOOTPOINT_SCALE       << "," ;
   out_ << traceHeader_.TRACE_UNIT             << "," ;
+  out_ << traceHeader_.TRANSD_CONST           << "," ;
   out_ << traceHeader_.TRANSD_UNIT            << "," ;
   out_ << traceHeader_.TRACE_IDENT            << "," ;
   out_ << traceHeader_.SCALE_TIME             << "," ;
   out_ << traceHeader_.SRC_ORIENT             << "," ;
-  out_ << traceHeader_.SRC_UNIT               << "," ;
-  out_ << traceHeader_.UNNASSIGNED1           << "," ;
-  out_ << traceHeader_.TRANSD_CONST           << "," ;
   out_ << traceHeader_.SRC_DIRECTION          << "," ;
   out_ << traceHeader_.SRC_MEASUREMT          << "," ;
+  out_ << traceHeader_.SRC_UNIT               << "," ;
+  out_ << traceHeader_.UNNASSIGNED1           << "," ;
+
+
 
   out_ << endl;
 

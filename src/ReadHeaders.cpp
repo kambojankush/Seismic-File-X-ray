@@ -115,18 +115,18 @@ int main(int argc, char* argv[])
 	        delete exttxtHeader;    	    	
     	}
     }
+
+    //Calculate no. of trace headers
     long long pos = seg.tellg();
     seg.seekg(0, ios::end);
     long long end = seg.tellg();
     seg.seekg(pos, ios::beg);
-    //for testing 4
-    // Calculated from text header
     long long no_of_traces = (end - pos)/10240;
+    
     //Create TraceHeader object
 	TraceHeader trcHeader;
     cout << no_of_traces << endl;
-    //for(int i = 0; i < no_of_traces; i++)
-    while(!seg.eof())
+    for(int i = 0; i < no_of_traces; i++)
     {
         //Allocate memory for TraceHeader
 	    char* trcData;
