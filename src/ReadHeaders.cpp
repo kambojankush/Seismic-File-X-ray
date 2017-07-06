@@ -34,33 +34,34 @@ int main(int argc, char* argv[])
 	if (!seg)
 	{
 		cerr << "Can't open file " << argv[1];
+		printfilestatus(seg);
 		exit(-2);
 	}
 	if (!out_txt)
 	{
 		cerr << "Can't open file " << argv[2];
+		printfilestatus(out_txt);
 		exit(-3);
 	}
 	if (!out_bin)
 	{
 		cerr << "Can't open file " << argv[3];
+		printfilestatus(out_bin);
 		exit(-4);
 	}
 	if (!out_exttxt)
 	{
 		cerr << "Can't open file " << argv[4];
+		printfilestatus(out_exttxt);
 		exit(-5);
 	}
 	if (!out_trc)
 	{
 		cerr << "Can't open file " << argv[5];
+		printfilestatus(out_trc);
 		exit(-6);
 	}
-	//Display file status
-	printfilestatus(seg);
-	printfilestatus(out_txt);
-	printfilestatus(out_bin);
-	printfilestatus(out_trc);
+
 	//Allocate memory for TextHeader
 	char* txtHeader = NULL;
 	txtHeader = new char[3200];
@@ -92,6 +93,7 @@ int main(int argc, char* argv[])
     {
     	cout << "\nvariable number of Extended Textual File Header records";
     	out_exttxt.close();
+    	exit(-7);
     }
     else if (num_ext_head == 0)
     {
@@ -107,20 +109,24 @@ int main(int argc, char* argv[])
 
 	        //Read, covert and write Extended Textual Header
 	        seg.read(exttxtHeader,3200);
-	        //convertASCII(exttxtHeader,3200);
+	        convertASCII(exttxtHeader,3200);
 	        write_text_header(out_exttxt,txtHeader);
 	        // free memory
-	        delete txtHeader;    	    	
+	        delete exttxtHeader;    	    	
     	}
     }
-    
+    long long pos = seg.tellg();
+    seg.seekg(0, ios::end);
+    long long end = seg.tellg();
+    seg.seekg(pos, ios::beg);
     //for testing 4
     // Calculated from text header
-    int no_of_traces = 4;
+    long long no_of_traces = (end - pos)/10240;
     //Create TraceHeader object
 	TraceHeader trcHeader;
-
-    for(int i = 0; i < no_of_traces; i++)
+    cout << no_of_traces << endl;
+    //for(int i = 0; i < no_of_traces; i++)
+    while(!seg.eof())
     {
         //Allocate memory for TraceHeader
 	    char* trcData;
