@@ -117,7 +117,7 @@ int main(int argc, const char **argv)
                   " `SHOOTPOINT`  int, " 
                   " `SHOOTPOINT_SCALE`  smallint, " 
                   " `TRACE_UNIT`  smallint, " 
-                  " `TRANSD_CONST` varchar(6) "
+                  " `TRANSD_CONST` varchar(6), "
                   " `TRANSD_UNIT`  smallint, " 
                   " `TRACE_IDENT`  smallint, " 
                   " `SCALE_TIME`  smallint, " 
@@ -125,9 +125,10 @@ int main(int argc, const char **argv)
                   " `SRC_DIRECTION` varchar(6), "
                   " `SRC_MEASUREMT` varchar(6), "
                   " `SRC_UNIT`  smallint, "
-                  " `UNNASSIGNED1` varchar(6), " 
+                  " `UNNASSIGNED1` varchar(6) " 
                   ") ");
     
+    stmt->execute("LOAD DATA LOCAL INFILE '../output/TraceHeader.csv' INTO TABLE traceheaders FIELDS TERMINATED BY ',';");
 
   } catch (sql::SQLException &e) {
     /*
