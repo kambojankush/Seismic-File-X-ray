@@ -1,8 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+#include <arpa/inet.h>
+#include <cstring>
 
-#include "../include/convEBCDIC.h"
+#include "../include/conv.h"
 #include "../include/functions.h"
 #include "../include/binaryheader.h"
 #include "../include/traceheader.h"
@@ -12,16 +14,16 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	//ensure proper usage
-	if (argc != 6)
+	if (argc != 7)
 	{
-		cout << "Usage: [./ReadHeaders filename.sgy {textheader}.txt {binaryheader}.txt {extendedtextheader}.txt {traceheader}.csv]";
+		cerr << "Usage: [./ReadHeaders filename.sgy {textheader}.txt {binaryheader}.txt {extendedtextheader}.txt {traceheader}.csv {tracedata}.csv]";
 		exit(-1);
 	}
 
 	//create ifstream object
 	ifstream seg;
 	//create ofstream objects
-	ofstream out_txt, out_bin, out_exttxt, out_trc;
+	ofstream out_txt, out_bin, out_exttxt, out_trc, out_trcdata;
 
 	//open files
 	seg.open(argv[1], ios::binary);
@@ -29,6 +31,7 @@ int main(int argc, char* argv[])
 	out_bin.open(argv[3], ios::trunc);
 	out_exttxt.open(argv[4], ios::trunc);
 	out_trc.open(argv[5], ios::trunc);
+	out_trcdata.open(argv[6], ios::trunc);
 
 	//error checking
 	if (!seg)
@@ -86,7 +89,7 @@ int main(int argc, char* argv[])
 	//free memory
 	delete binData;
 
-    //....TODO READ EXT TEXT HEADER
+    //Read Extended Textual Header
     //Crrently untested
     short int num_ext_head = bHeader.get_exthead();
     if (num_ext_head == -1)
@@ -122,7 +125,7 @@ int main(int argc, char* argv[])
     long long end = seg.tellg();
     seg.seekg(pos, ios::beg);
     long long no_of_traces = (end - pos)/10240;
-    
+
     //Create TraceHeader object
 	TraceHeader trcHeader;
     cout << no_of_traces << endl;
@@ -139,16 +142,36 @@ int main(int argc, char* argv[])
 	    trcHeader.write(out_trc);
         //free memory
         delete trcData;
-    
-        //Sample data will be according to as def in binary header
-        //using 4 for test file
+        
+        //Read Trace Samples
         unsigned short int num_of_sampl = trcHeader.get_numsampl();
-        seg.seekg(num_of_sampl * 4, ios::cur);
+        float ieeesample;
+        uint32_t ibmsample;
+
+	    
+        for (size_t i = 0; i < num_of_sampl; i++)
+        {
+        	//Allocate memory for trace sample
+            char* trcValue;
+	        trcValue = new char[4];
+        	seg.read(trcValue, 4);
+
+        	//Call to conv IBM to IEEE format
+        	ibmsample = *reinterpret_cast<uint32_t*>(trcValue);
+        	ieeesample = toIeee(ibmsample);
+        	//Write to file
+        	out_trcdata << ieeesample << ",";
+        	//Free memory
+        	delete trcValue;
+        }
+        
+        out_trcdata << endl;
     }
 	//close the open files
 	out_txt.close();
 	out_bin.close();
 	out_trc.close();
+	out_trcdata.close();
 	seg.close();
 
 	//Program successfully executed
