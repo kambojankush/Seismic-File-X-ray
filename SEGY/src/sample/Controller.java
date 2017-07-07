@@ -5,10 +5,9 @@ import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import java.io.*;
 import java.nio.Buffer;
-
-public class Controller {
-
- 
+//Controller would be updated as required!! :@
+public class Controller 
+{ 
     public FileReader reader; 
     public TextArea textHeader;  //Defining required FXML objects here
     public TextArea binaryHeader;
@@ -80,7 +79,7 @@ public class Controller {
         BufferedReader br;
         try {
             FileReader reader = new FileReader("Path of text header file");
-            br = new BufferedReader(reader);
+            br = new BufferedReader(reader);   
             String line, newLine = "\n";
 
             while ((line = br.readLine()) != null) {
