@@ -48,6 +48,18 @@ void printfilestatus(ofstream& f)
   cout << "fail()" << f.fail() << endl;
 }
 
+unsigned int csv_read(ifstream& in_, int tracenum_)
+{
+  string str;
+  int num_of_samples;
+  while(tracenum_--)
+  {
+    getline(in_, str);
+  }
+  in_ >> num_of_samples;
+  return num_of_samples;
+}
+
 
 /************************************************************************************************************/
 /******************************************FRIEND FUNCTIONS**************************************************/
