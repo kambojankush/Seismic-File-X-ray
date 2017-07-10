@@ -213,6 +213,7 @@ void TraceHeader :: store(char* arr)
 //Overload the stream << operator to write TRACE HEADER objects directly to file
 ostream& operator << (ostream& out_, TraceHeader& traceHeader_)
 {
+  out_ << traceHeader_.NUM_OF_SAMPL           << "," ;
   out_ << traceHeader_.TRACE_SEQ_GLOBAL       << "," ;
   out_ << traceHeader_.TRACE_SEQ_LOCAL        << "," ;
   out_ << traceHeader_.ORI_RECORD_NUM         << "," ;
@@ -251,7 +252,7 @@ ostream& operator << (ostream& out_, TraceHeader& traceHeader_)
   out_ << traceHeader_.DELAY_T                << "," ;
   out_ << traceHeader_.MUTE_T_STRT            << "," ;
   out_ << traceHeader_.MUTE_T_END             << "," ;
-  out_ << traceHeader_.NUM_OF_SAMPL           << "," ;
+  
   out_ << traceHeader_.SAMPLE_INTRVL          << "," ;
   out_ << traceHeader_.GAIN_TYPE              << "," ;
   out_ << traceHeader_.GAIN_CONST             << "," ;
