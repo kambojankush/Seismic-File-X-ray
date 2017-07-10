@@ -14,9 +14,9 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	//ensure proper usage
-	if (argc != 7)
+	if (argc != 6)
 	{
-		cerr << "Usage: [./ReadHeaders filename.sgy {textheader}.txt {binaryheader}.txt {extendedtextheader}.txt {traceheader}.csv {tracedata}.csv]";
+		cerr << "Usage: [./ReadHeaders filename.sgy {textheader}.txt {binaryheader}.txt {extendedtextheader}.txt {traceheader}.csv";
 		exit(-1);
 	}
 
@@ -31,7 +31,6 @@ int main(int argc, char* argv[])
 	out_bin.open(argv[3], ios::trunc);
 	out_exttxt.open(argv[4], ios::trunc);
 	out_trc.open(argv[5], ios::trunc);
-	out_trcdata.open(argv[6], ios::trunc);
 
 	//error checking
 	if (!seg)
@@ -142,36 +141,14 @@ int main(int argc, char* argv[])
 	    trcHeader.write(out_trc);
         //free memory
         delete trcData;
-        
-        //Read Trace Samples
         unsigned short int num_of_sampl = trcHeader.get_numsampl();
-        float ieeesample;
-        uint32_t ibmsample;
-
-	    
-        for (size_t i = 0; i < num_of_sampl; i++)
-        {
-        	//Allocate memory for trace sample
-            char* trcValue;
-	        trcValue = new char[4];
-        	seg.read(trcValue, 4);
-
-        	//Call to conv IBM to IEEE format
-        	ibmsample = *reinterpret_cast<uint32_t*>(trcValue);
-        	ieeesample = toIeee(ibmsample);
-        	//Write to file
-        	out_trcdata << ieeesample << ",";
-        	//Free memory
-        	delete trcValue;
-        }
-        
-        out_trcdata << endl;
+        seg.seekg(num_of_sampl*4, ios::cur);
     }
 	//close the open files
 	out_txt.close();
 	out_bin.close();
 	out_trc.close();
-	out_trcdata.close();
+	//out_trcdata.close();
 	seg.close();
 
 	//Program successfully executed
