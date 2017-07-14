@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 {
 	if (argc < 2)
 	{
-		cerr << "Usage ./ReadData path [trace no] [sample no] [no of ext txt headers]";
+		cerr << "Usage ./ReadData filename.sgy [trace no] [sample no] [no of ext txt headers]";
 		exit(-1);
 	}
 
