@@ -61,6 +61,7 @@ public:
   void set_desc(void);
   void store(char* );
   short int get_exthead(void);
+  unsigned short int get_num_of_samples(void);
   void write(ofstream& );
   friend short int readvalue_si(char*, int);
   friend int readvalue_i(char*, int);
@@ -179,6 +180,10 @@ void BinaryHeader :: set_desc(void)
                              "Header records (i.e. this file has no Extended Textual File Header(s)). A value";
 }
 
+unsigned short int BinaryHeader :: get_num_of_samples(void)
+{
+  return NUM_OF_SAMPLES.value;
+}
 short int BinaryHeader :: get_exthead(void)
 {
     return NUM_EXT_HEAD.value;

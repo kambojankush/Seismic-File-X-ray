@@ -124,7 +124,8 @@ int main(int argc, char* argv[])
     seg.seekg(0, ios::end);
     long long end = seg.tellg();
     seg.seekg(pos, ios::beg);
-    long long no_of_traces = (end - pos)/10240;
+    unsigned short int num_of_samples = bHeader.get_num_of_samples();
+    long long no_of_traces = (end - pos)/(num_of_samples*4 + 240);
 
     //Create TraceHeader object
 	TraceHeader trcHeader;
