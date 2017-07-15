@@ -223,7 +223,7 @@ void BinaryHeader :: store(char* arr)
   SEGY_REV_NUM.value = readvalue_si(arr, 300);
   FIXED_LEN.value = readvalue_si(arr, 302);
   NUM_EXT_HEAD.value = readvalue_si(arr, 304);
-     
+
 }
 
 //Overload the stream << operator to write BINARY HEADER objects directly to file
@@ -236,6 +236,7 @@ ostream& operator << (ostream& out_, BinaryHeader& binaryHeader_)
   out_ << "NUM_OF_AUX            :" << binaryHeader_.NUM_OF_AUX.value            << endl ;
   out_ << "INTERVAL_M            :" << binaryHeader_.INTERVAL_MS.value           << endl ;
   out_ << "INTERVAL_MS_ORI       :" << binaryHeader_.INTERVAL_MS_ORI.value       << endl ;
+  out_ << "NUM_OF_SAMPLES        :" << binaryHeader_.NUM_OF_SAMPLES.value        << endl ;
   out_ << "NUM_OF_SAMPLES_ORI    :" << binaryHeader_.NUM_OF_SAMPLES_ORI.value    << endl ;
   out_ << "SAMPLE_FORMAT         :" << binaryHeader_.SAMPLE_FORMAT.value         << endl ;
   out_ << "ENSEMBLE              :" << binaryHeader_.ENSEMBLE.value              << endl ;
