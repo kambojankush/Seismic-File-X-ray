@@ -100,6 +100,7 @@ int main(int argc, char* argv[])
     else if (num_ext_head == 0)
     {
         cout <<"\nno Extended Textual Binary Header";
+        remove(argv[4]);
         out_exttxt.close();
     }
     else
