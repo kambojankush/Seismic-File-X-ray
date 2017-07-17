@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="12.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="142.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <TabPane prefHeight="417.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" GridPane.rowSpan="4">
+            <tabs>
+                <Tab text="Text Header">
+                    <content>
+                        <TextArea fx:id="textHeader" prefHeight="200.0" prefWidth="200.0" />
+                    </content>
+
+                </Tab>
+                <Tab text="Binary Header">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TextArea fx:id="binaryHeader" layoutX="140.0" layoutY="57.0" prefHeight="387.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Trace Header">
+                    <content>
+                        <AnchorPane focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="413.0" prefWidth="671.0">
+                            <children>
+                                <Button fx:id="Display" layoutX="410.0" layoutY="2.0" mnemonicParsing="false" onAction="#onDisplay" text="Display" />
+                                <TextArea fx:id="traceSample" layoutX="465.0" layoutY="27.0" prefHeight="360.0" prefWidth="235.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="465.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
+                                <Spinner fx:id="tracespinner" editable="true" initialValue="0" layoutX="80.0" layoutY="2.0" max="999999" min="0" prefHeight="25.0" prefWidth="80.0" />
+                                <Spinner fx:id="samplespinner" editable="true" initialValue="0" layoutX="280.0" layoutY="2.0" max="999999" min="0" prefHeight="25.0" prefWidth="80.0" />
+                                <Label layoutX="8.0" layoutY="4.0" prefHeight="17.0" prefWidth="64.0" text="Trace No.">
+                                    <font>
+                                        <Font name="Century" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="191.0" prefHeight="25.0" prefWidth="69.0" text="Sample No.">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                                <TextArea fx:id="traceHeader" layoutX="81.0" layoutY="27.0" prefHeight="360.0" prefWidth="466.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="234.0" AnchorPane.topAnchor="27.0" />
+
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Extended Textual Header">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TextArea fx:id="EXTtextHeader" layoutX="131.0" layoutY="47.0" prefHeight="336.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                <TextArea fx:id="EXTtrace" editable="false" layoutX="126.0" layoutY="46.0" prefHeight="359.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+            <GridPane.margin>
+                <Insets top="22.0" />
+            </GridPane.margin>
+        </TabPane>
+        <ToolBar fx:id="extendedtxt" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="155.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <items>
+                <Button mnemonicParsing="false" onAction="#execute" text="Open" />
+                <Button fx:id="readbutton" layoutX="2.0" mnemonicParsing="false" onAction="#readfile" text="Read" />
+                <Button mnemonicParsing="false" onAction="#newFile" text="Open New File" />
+            </items>
+            <cursor>
+                <Cursor fx:constant="DEFAULT" />
+            </cursor>
+            <GridPane.margin>
+                <Insets top="20.0" />
+            </GridPane.margin>
+        </ToolBar>
+    </children>
+</GridPane>
