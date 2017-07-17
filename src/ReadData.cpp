@@ -26,13 +26,13 @@ int main(int argc, char* argv[])
 
 	int tracenum = (argc >= 3) ? atoi(argv[2]) : DEFAULT_TRACE;
 	int samplenum = (argc >= 4) ? atoi(argv[3]) : DEFAULT_SAMPLE;
-    int skip = (argc >= 5) ? (atoi(argv[4])*3200 + DEFAULT_SKIP) : DEFAULT_SKIP;
+	int skip = (argc >= 5) ? (atoi(argv[4])*3200 + DEFAULT_SKIP) : DEFAULT_SKIP;
 
-    //Create file objects
-    ifstream in_trc, seg;
-    ofstream out_trcdata;
+	//Create file objects
+	ifstream in_trc, seg;
+	ofstream out_trcdata;
 
-    //Open files
+	//Open files
 	seg.open(argv[1], ios::binary);
 	in_trc.open("../output/TraceHeader.csv");
 	out_trcdata.open("../output/TraceData.csv", ios::trunc);
@@ -74,8 +74,8 @@ int main(int argc, char* argv[])
 	unsigned int num_of_sample = csv_read(in_trc, tracenum);
 	int remaining_sample = num_of_sample - samplenum;
 
-    float ieeesample;
-    uint32_t ibmsample;
+	float ieeesample;
+	uint32_t ibmsample;
 
 	//will skip the trace header and place pointer on sample to be read
 	seg.seekg(240 + samplenum*4, ios::cur);
@@ -84,8 +84,8 @@ int main(int argc, char* argv[])
 	for(int i = 0; i < remaining_sample; i++)
 	{
 		//Allocate memory for trace sample
-	    char* trcValue;
-	    trcValue = new char[4];
+		char* trcValue;
+		trcValue = new char[4];
 		seg.read(trcValue, 4);
 
 		//Call to conv IBM to IEEE format
