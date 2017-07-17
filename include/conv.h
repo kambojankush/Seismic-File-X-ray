@@ -57,10 +57,10 @@ char EBCDICtoASCII(unsigned char c)
 }
 
 /******************************************************************************************************************************************************************************
-*    To convert 4-Byte IBM floating point to IEEE                                                                                                                             *                                                                                                                                                     *  
+*    To convert 4-Byte IBM floating point to IEEE                                                                                                                             * *                                                                                                                                                                             *  
 *                                                                                                                                                                             *
-*    Ref:                                                                                                                                                                     *
-*                                                                                                                                                                             *
+*    Ref:http://www.palladiumconsulting.com/2014/09/little-performance-explorations-c/                                                                                        *
+*    Thanks Sebastian Good                                                                                                                                                    *
 *                                                                                                                                                                             *
 *******************************************************************************************************************************************************************************/
 
