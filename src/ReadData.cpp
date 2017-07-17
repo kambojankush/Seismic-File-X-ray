@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
 
 	//count no of sample in given trace
 	unsigned int num_of_sample = csv_read(in_trc, tracenum);
-	int sample_dist = num_of_sample - samplenum;
+	int remaining_sample = num_of_sample - samplenum;
 
     float ieeesample;
     uint32_t ibmsample;
@@ -80,8 +80,8 @@ int main(int argc, char* argv[])
 	//will skip the trace header and place pointer on sample to be read
 	seg.seekg(240 + samplenum*4, ios::cur);
 
-	//Wite next 20(or remaining samples) to file
-	for(int i = 0; i < 20 && i <= sample_dist; i++)
+	//Wite next  remaining samples to file
+	for(int i = 0; i < remaining_sample; i++)
 	{
 		//Allocate memory for trace sample
 	    char* trcValue;
@@ -92,6 +92,9 @@ int main(int argc, char* argv[])
 		ibmsample = *reinterpret_cast<uint32_t*>(trcValue);
 		ieeesample = toIeee(ibmsample);
 		//Write to file
+		if (i == 2499)
+			out_trcdata << ieeesample << "\n";
+		else
 		out_trcdata << ieeesample << ",";
 		//Free memory
 		delete trcValue;
