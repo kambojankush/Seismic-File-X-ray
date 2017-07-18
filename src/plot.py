@@ -15,6 +15,7 @@ plt.xlabel('Time  (μs)')
 plt.ylabel('Data Sample')
 plt.tick_params(top='off', bottom='off', left='off', right='off', labelleft='on', labelbottom='on')
 fig = plt.gcf()
+#plt.show()
 
 fig.savefig('../output/tracedata.png') 
 
