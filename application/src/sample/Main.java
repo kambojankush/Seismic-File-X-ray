@@ -10,9 +10,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("front.fxml")); // Provide the path to fxml file.
-        primaryStage.setTitle("SEGY FILE READER");
-        primaryStage.setScene(new Scene(root, 1280 , 720));// Default resolution of the frontEnd
+        Parent root = FXMLLoader.load(getClass().getResource("front.fxml"));
+        primaryStage.setTitle("");
+
+        primaryStage.setScene(new Scene(root, 1280 , 720));
         primaryStage.show();
     }
 

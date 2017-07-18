@@ -1,22 +1,102 @@
 package sample;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+
+import javafx.scene.control.*;
+
 import javafx.stage.FileChooser;
+
+
 import java.io.*;
-import java.nio.Buffer;
-//Controller would be updated as required!! :@
-public class Controller 
-{ 
-    public FileReader reader; 
-    public TextArea textHeader;  //Defining required FXML objects here
+
+public class Controller {
+
     public TextArea binaryHeader;
     public TextArea traceHeader;
     public TextArea EXTtrace;
+    public Spinner<Integer> tracespinner;
+    public Spinner<Integer> samplespinner;
+    public TextArea textHeader;
+    public TextArea traceSample;
 
-    public String opener()   
-    {
-        FileChooser fc = new FileChooser();   //Filechooser class used to open select file screen
+    String path_exe = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadHeaders";
+    String path_TextHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/TextHeader.txt";
+    String path_BinaryHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/BinaryHeader.txt";
+    String path_ExtendedTextHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/ExtendedTextHeader.txt";
+    String path_TraceHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceHeader.csv";
+    String path_TraceData = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceData.csv";
+    String path_TraceTitle = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceTitle.csv";
+    String path_exe2 = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadData";
+    String path_Segy = "/home/ankush/Documents/Project/Seismic File X-ray/Dump/PSTM_STACK_439_UTM.sgy";
+    public void onDisplay() throws IOException {
+
+        traceHeader.clear();
+        String a = tracespinner.getEditor().getText();
+        String b = samplespinner.getEditor().getText();
+        System.out.println(a);
+        FileReader data = new FileReader(path_TraceData);
+        FileReader header = new FileReader(path_TraceHeader);
+        //FileReader title = new FileReader(path_TraceTitle);
+        BufferedReader datardr = new BufferedReader(data);
+        //BufferedReader  titlerdr= new BufferedReader(title);
+        LineNumberReader headerrdr = new LineNumberReader(header);
+
+
+
+        if (new File(path_exe2).exists())
+
+        {
+            try {
+                ProcessBuilder pb = new ProcessBuilder(path_exe2, path_Segy, a, b);
+                pb.redirectError();
+                Process p = pb.start();
+                InputStream is = p.getInputStream();
+                int value = -1;
+                while ((value = is.read()) != -1) {
+                    System.out.print((char) value);
+                }
+                int exitCode = p.waitFor();
+                System.out.println(path_exe2 + " EXITED WITH " + exitCode);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else
+            System.out.println(path_exe2 + " Doesn't Exists");
+
+        traceSample.appendText("dddsd");
+
+        int l = Integer.parseInt(tracespinner.getEditor().getText());
+
+
+        String line, line2;
+        while (headerrdr.readLine() != null) {
+            if (headerrdr.getLineNumber() == l) {
+                traceHeader.appendText(headerrdr.readLine().replaceAll(",", "\n"));
+
+                //String[] ary = line.split("\n");
+
+                /*int i = 0;
+                while ((line2 = titlerdr.readLine()) != null) {
+                    if (line2.isEmpty())
+                        traceHeader.appendText(line2 + "\t\t\t\t" + ary[i] + "\n");
+                    else
+                        traceHeader.appendText(line2 + "\t\t" + ary[i] + "\n");
+                    ++i;
+                }
+            */
+            }
+        }
+    }
+
+
+
+
+
+
+    public String opener() {
+
+        FileChooser fc = new FileChooser();
         File selectFile = fc.showOpenDialog(null);
         String path = null;
         if (selectFile != null) {
@@ -29,14 +109,12 @@ public class Controller
         return path;
     }
 
-    public void execute()    //Executs cpp exe file and calls opener function to get the address of Segy file, passes file names as arguments
-    { 
-        String path = "PATH OF CPP EXE FILE";   //Add. of exe file
-        if (new File(path).exists())
+    public void execute() {
+        if (new File(path_exe).exists())
 
         {
             try {
-                ProcessBuilder pb = new ProcessBuilder(path, opener(), "outputfile1.txt", "outputfile2.txt", "extendedtextheader.txt", "traceheader.csv", "tracedata.csv");//Passing file names, address of segyFile to it.
+                ProcessBuilder pb = new ProcessBuilder(path_exe, opener(), path_TextHeader, path_BinaryHeader, path_ExtendedTextHeader, path_TraceHeader);
                 pb.redirectError();
                 Process p = pb.start();
                 InputStream is = p.getInputStream();
@@ -45,65 +123,65 @@ public class Controller
                     System.out.print((char) value);
                 }
                 int exitCode = p.waitFor();
-                System.out.println(path + " EXITED WITH " + exitCode); //Printing exit code for this process
+                System.out.println(path_exe + " EXITED WITH " + exitCode);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         } else
-            System.out.println(path + " Doesn't Exists");
+            System.out.println(path_exe + " Doesn't Exists");
 
     }
 
-    public void newFile() //Deletes the txt, csv files and clears the text on textarea 
-    {
-        File reader = new File("C:\\Users\\Student\\IdeaProjects\\SEGY\\outputfile1.txt");
+    public void newFile() {
+        File reader = new File(path_TextHeader);
         reader.delete();
-        reader = new File("C:\\Users\\Student\\IdeaProjects\\SEGY\\outputfile2.txt");
+        reader = new File(path_BinaryHeader);
         reader.delete();
-        reader = new File("C:\\Users\\Student\\IdeaProjects\\SEGY\\extendedtextheader.txt");
+        reader = new File(path_ExtendedTextHeader);
         reader.delete();
-        reader = new File("C:\\Users\\Student\\IdeaProjects\\SEGY\\traceheader.csv");
+        reader = new File(path_TraceHeader);
         reader.delete();
         textHeader.clear();
         traceHeader.clear();
         binaryHeader.clear();
         EXTtrace.clear();
 
-        execute();  // Calling execute function again to open the Select-file screen and run the cpp exe file again
+        execute();
     }
 
-    public void readfile() // Read function to read the files and displaying them on Text Area 
-    {
+    public void readfile(){
         BufferedReader br;
+
         try {
-            FileReader reader = new FileReader("Path of text header file");
-            br = new BufferedReader(reader);   
+            FileReader reader = new FileReader(path_TextHeader);
+            br = new BufferedReader(reader);
             String line, newLine = "\n";
+            int grabber;
 
+            textHeader.setStyle("-fx-font-family: monospace");
             while ((line = br.readLine()) != null) {
+
                 textHeader.appendText(line);
-                textHeader.appendText(newLine);
-
+                textHeader.appendText("\n");
             }
-            reader = new FileReader("Path of Binary Header file");
+            reader = new FileReader(path_BinaryHeader);
             br = new BufferedReader(reader);
 
-
+            binaryHeader.setStyle("-fx-font-family: monospace");
             while ((line = br.readLine()) != null) {
-                binaryHeader.appendText(line);
-                binaryHeader.appendText(newLine);
+
+                binaryHeader.appendText(line+"\n");
 
             }
-            reader = new FileReader("Path of trace header file");
-            br = new BufferedReader(reader);
-
-            traceHeader.appendText( br.readLine().replaceAll(",","\n"));
-            traceHeader.appendText(newLine);
 
 
-            reader = new FileReader("Path of Extended Trace Header file");
+
+
+
+
+            /*reader = new FileReader("C:\\Users\\Student\\IdeaProjects\\SEGY\\extendedtextheader.txt");
             br = new BufferedReader(reader);
 
             while ((line = br.readLine()) != null) {
@@ -111,7 +189,6 @@ public class Controller
                 EXTtrace.appendText(newLine);
 
             }
-
 
             //*************Reading Trace Data***************
                 /*reader = new FileReader("PATH OF TRACE DATA FILE");
@@ -125,13 +202,12 @@ public class Controller
 
         }
 
-         catch (IOException e) {
+        catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 }
-
 
 
 
