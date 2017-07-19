@@ -24,10 +24,12 @@ int main(int argc, char* argv[])
 		exit(-1);
 	}
 
-	int tracenum = (argc >= 3) ? atoi(argv[2]) : DEFAULT_TRACE;
-	int samplenum = (argc >= 4) ? atoi(argv[3]) : DEFAULT_SAMPLE;
+	int tracenum = (argc >= 3) ? atoi(argv[2]) - 1 : DEFAULT_TRACE;
+	int samplenum = (argc >= 4) ? atoi(argv[3]) - 1 : DEFAULT_SAMPLE;
 	int skip = (argc >= 5) ? (atoi(argv[4])*3200 + DEFAULT_SKIP) : DEFAULT_SKIP;
 
+	if (tracenum < DEFAULT_TRACE) tracenum = DEFAULT_TRACE;
+	if (samplenum < DEFAULT_SAMPLE) samplenum = DEFAULT_SAMPLE;
 	//Create file objects
 	ifstream in_trc, seg;
 	ofstream out_trcdata;
