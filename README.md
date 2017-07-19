@@ -1,4 +1,4 @@
-# Sesmic-File-X-ray
+# Seismic-File-X-ray
 This project is to extract the desired information from seismic (SEG-Y) file into text format from seismic file headers.
 This information can then be utilised for desired analysis without the need to graphically display information; thus avoiding the use of huge RAM and GPU.
 
