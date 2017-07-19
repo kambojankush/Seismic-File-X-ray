@@ -174,12 +174,25 @@ public class Controller {
             binaryHeader.setStyle("-fx-font-family: monospace");
             while ((line = br.readLine()) != null) {
 
-                binaryHeader.appendText(line+"\n");
+                binaryHeader.appendText(line + "\n");
 
             }
 
-        }
+            if (new File(path_ExtendedTextHeader).exists()) {
+                reader = new FileReader(path_ExtendedTextHeader);
+                br = new BufferedReader(reader);
 
+                EXTtrace.setStyle("-fx-font-family: monospace");
+                while ((line = br.readLine()) != null) {
+
+                    EXTtrace.appendText(line + "\n");
+
+                }
+            }
+            else
+                EXTtrace.appendText("No Extended Textual File Header Found");
+
+        }
         catch (IOException e) {
             e.printStackTrace();
         }
