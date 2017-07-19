@@ -18,15 +18,17 @@ public class Controller {
     public TextArea textHeader;
     public TextArea traceSample;
 
-    String path_exe = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadHeaders";
-    String path_TextHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/TextHeader.txt";
-    String path_BinaryHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/BinaryHeader.txt";
-    String path_ExtendedTextHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/ExtendedTextHeader.txt";
-    String path_TraceHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceHeader.csv";
-    String path_TraceData = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceData.csv";
-    String path_TraceTitle = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceTitle.txt";
-    String path_exe2 = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadData";
-    String path_Segy = "/home/ankush/Documents/Project/Seismic File X-ray/Dump/PSTM_STACK_439_UTM.sgy";
+    //Add paths to required files
+    String path_exe = "";
+    String path_TextHeader = "";
+    String path_BinaryHeader = "";
+    String path_ExtendedTextHeader = "";
+    String path_TraceHeader = "";
+    String path_TraceData = "";
+    String path_TraceTitle = "";
+    String path_exe2 = "";
+    String path_Segy = "";
+    
     public void onDisplay() throws IOException {
 
         traceHeader.clear();
@@ -182,7 +184,6 @@ public class Controller {
 
     }
 }
-
 
 
 
