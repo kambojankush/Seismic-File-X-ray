@@ -24,20 +24,21 @@ public class Controller {
     String path_ExtendedTextHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/ExtendedTextHeader.txt";
     String path_TraceHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceHeader.csv";
     String path_TraceData = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceData.csv";
-    String path_TraceTitle = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceTitle.csv";
+    String path_TraceTitle = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceTitle.txt";
     String path_exe2 = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadData";
     String path_Segy = "/home/ankush/Documents/Project/Seismic File X-ray/Dump/PSTM_STACK_439_UTM.sgy";
     public void onDisplay() throws IOException {
 
         traceHeader.clear();
+        traceSample.clear();
         String a = tracespinner.getEditor().getText();
         String b = samplespinner.getEditor().getText();
         System.out.println(a);
         FileReader data = new FileReader(path_TraceData);
         FileReader header = new FileReader(path_TraceHeader);
-        //FileReader title = new FileReader(path_TraceTitle);
+        FileReader title = new FileReader(path_TraceTitle);
         BufferedReader datardr = new BufferedReader(data);
-        //BufferedReader  titlerdr= new BufferedReader(title);
+        BufferedReader  titlerdr= new BufferedReader(title);
         LineNumberReader headerrdr = new LineNumberReader(header);
 
 
@@ -64,7 +65,9 @@ public class Controller {
         } else
             System.out.println(path_exe2 + " Doesn't Exists");
 
-        traceSample.appendText("dddsd");
+
+        traceSample.setStyle("-fx-font-family: monospace");
+        traceSample.appendText(datardr.readLine().replaceAll(",", "\n"));
 
         int l = Integer.parseInt(tracespinner.getEditor().getText());
 
@@ -72,25 +75,20 @@ public class Controller {
         String line, line2;
         while (headerrdr.readLine() != null) {
             if (headerrdr.getLineNumber() == l) {
-                traceHeader.appendText(headerrdr.readLine().replaceAll(",", "\n"));
 
-                //String[] ary = line.split("\n");
+                line = headerrdr.readLine().replaceAll(",", "\n");
+                String[] ary = line.split("\n");
 
-                /*int i = 0;
+                traceHeader.setStyle("-fx-font-family: monospace");
+                int i = 0;
                 while ((line2 = titlerdr.readLine()) != null) {
-                    if (line2.isEmpty())
-                        traceHeader.appendText(line2 + "\t\t\t\t" + ary[i] + "\n");
-                    else
-                        traceHeader.appendText(line2 + "\t\t" + ary[i] + "\n");
-                    ++i;
+                        traceHeader.appendText(line2 + ary[i] + "\n");
+                        i++;
                 }
-            */
+
             }
         }
     }
-
-
-
 
 
 
@@ -176,30 +174,6 @@ public class Controller {
 
             }
 
-
-
-
-
-
-            /*reader = new FileReader("C:\\Users\\Student\\IdeaProjects\\SEGY\\extendedtextheader.txt");
-            br = new BufferedReader(reader);
-
-            while ((line = br.readLine()) != null) {
-                EXTtrace.appendText(line);
-                EXTtrace.appendText(newLine);
-
-            }
-
-            //*************Reading Trace Data***************
-                /*reader = new FileReader("PATH OF TRACE DATA FILE");
-                     br = new BufferedReader(reader);
-
-                    while ((line = br.readLine()) != null) {
-                        traceHeader.appendText(line);
-                        traceHeader.appendText(newLine);
-                 }
-              */
-
         }
 
         catch (IOException e) {
@@ -208,6 +182,7 @@ public class Controller {
 
     }
 }
+
 
 
 
