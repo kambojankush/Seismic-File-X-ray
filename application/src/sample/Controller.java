@@ -27,7 +27,7 @@ public class Controller {
     String path_ExtendedTextHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/ExtendedTextHeader.txt";
     String path_TraceHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceHeader.csv";
     String path_TraceData = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceData.csv";
-    String path_TraceTitle = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceTitle.txt";
+    String path_TraceTitle = "/home/ankush/Documents/Project/Seismic File X-ray/TraceTitle.txt";
     String path_exe2 = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadData";
     String path_Segy ;
     
