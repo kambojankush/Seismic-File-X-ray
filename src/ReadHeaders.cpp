@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
     }
     else if (num_ext_head == 0)
     {
-        cout <<"\nno Extended Textual Binary Header";
+        cout <<"\nno Extended Textual File Header";
         remove(argv[4]);
         out_exttxt.close();
     }
@@ -128,8 +128,8 @@ int main(int argc, char* argv[])
     long long no_of_traces = (end - pos)/(num_of_samples*4 + 240);
 
     //Create TraceHeader object
-	TraceHeader trcHeader;
-    cout << no_of_traces << endl;
+    TraceHeader trcHeader;
+
     for(int i = 0; i < no_of_traces; i++)
     {
         //Allocate memory for TraceHeader
@@ -143,6 +143,7 @@ int main(int argc, char* argv[])
 	    trcHeader.write(out_trc);
         //free memory
         delete trcData;
+
         unsigned short int num_of_sampl = trcHeader.get_numsampl();
         seg.seekg(num_of_sampl*4, ios::cur);
     }
@@ -150,7 +151,6 @@ int main(int argc, char* argv[])
 	out_txt.close();
 	out_bin.close();
 	out_trc.close();
-	//out_trcdata.close();
 	seg.close();
 
 	//Program successfully executed
