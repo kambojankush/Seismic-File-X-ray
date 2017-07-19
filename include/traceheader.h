@@ -252,7 +252,6 @@ ostream& operator << (ostream& out_, TraceHeader& traceHeader_)
   out_ << traceHeader_.DELAY_T                << "," ;
   out_ << traceHeader_.MUTE_T_STRT            << "," ;
   out_ << traceHeader_.MUTE_T_END             << "," ;
-  
   out_ << traceHeader_.SAMPLE_INTRVL          << "," ;
   out_ << traceHeader_.GAIN_TYPE              << "," ;
   out_ << traceHeader_.GAIN_CONST             << "," ;
