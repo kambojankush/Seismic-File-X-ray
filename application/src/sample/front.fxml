@@ -81,7 +81,7 @@
         <ToolBar fx:id="extendedtxt" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="155.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
             <items>
                 <Button mnemonicParsing="false" onAction="#newFile" text="Open" />
-                <Button fx:id="readbutton" layoutX="2.0" mnemonicParsing="false" onAction="#readfile" text="Read" />
+                <Button fx:id="readbutton" layoutX="2.0" disable="true" mnemonicParsing="false" onAction="#readfile" text="Read" />
             </items>
             <cursor>
                 <Cursor fx:constant="DEFAULT" />

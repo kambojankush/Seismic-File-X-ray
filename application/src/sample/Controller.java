@@ -17,6 +17,7 @@ public class Controller {
     public Spinner<Integer> samplespinner;
     public TextArea textHeader;
     public TextArea traceSample;
+    public Button readbutton;
 
     //Add paths to required files
     String path_exe = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadHeaders";
@@ -124,6 +125,8 @@ public class Controller {
                 }
                 int exitCode = p.waitFor();
                 System.out.println(path_exe + " EXITED WITH " + exitCode);
+
+                readbutton.setDisable(false);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
