@@ -50,6 +50,7 @@ public class Controller {
                     System.out.print((char) value);
                 }
                 int exitCode = p.waitFor();
+                
                 System.out.println(path_exe2 + " EXITED WITH " + exitCode);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -192,6 +193,7 @@ public class Controller {
             else
                 EXTtrace.appendText("No Extended Textual File Header Found");
 
+            readbutton.setDisable(true);
         }
         catch (IOException e) {
             e.printStackTrace();
