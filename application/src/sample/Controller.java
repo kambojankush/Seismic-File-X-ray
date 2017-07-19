@@ -19,15 +19,15 @@ public class Controller {
     public TextArea traceSample;
 
     //Add paths to required files
-    String path_exe = "";
-    String path_TextHeader = "";
-    String path_BinaryHeader = "";
-    String path_ExtendedTextHeader = "";
-    String path_TraceHeader = "";
-    String path_TraceData = "";
-    String path_TraceTitle = "";
-    String path_exe2 = "";
-    String path_Segy = "";
+    String path_exe = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadHeaders";
+    String path_TextHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/TextHeader.txt";
+    String path_BinaryHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/BinaryHeader.txt";
+    String path_ExtendedTextHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/ExtendedTextHeader.txt";
+    String path_TraceHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceHeader.csv";
+    String path_TraceData = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceData.csv";
+    String path_TraceTitle = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceTitle.txt";
+    String path_exe2 = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadData";
+    String path_Segy = "/home/ankush/Documents/Project/Seismic File X-ray/Dump/PSTM_STACK_439_UTM.sgy";
     
     public void onDisplay() throws IOException {
 
@@ -136,13 +136,15 @@ public class Controller {
 
     public void newFile() {
         File reader = new File(path_TextHeader);
-        reader.delete();
+        if (reader.exists()) reader.delete();
         reader = new File(path_BinaryHeader);
-        reader.delete();
+        if (reader.exists()) reader.delete();
         reader = new File(path_ExtendedTextHeader);
-        reader.delete();
+        if (reader.exists()) reader.delete();
         reader = new File(path_TraceHeader);
-        reader.delete();
+        if (reader.exists()) reader.delete();
+        reader = new File(path_TraceData);
+        if (reader.exists()) reader.delete();
         textHeader.clear();
         traceHeader.clear();
         binaryHeader.clear();
