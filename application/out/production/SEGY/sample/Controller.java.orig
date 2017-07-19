@@ -17,9 +17,8 @@ public class Controller {
     public Spinner<Integer> samplespinner;
     public TextArea textHeader;
     public TextArea traceSample;
-    public Button readbutton;
 
-    //Add paths to required files
+<<<<<<< HEAD
     String path_exe = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadHeaders";
     String path_TextHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/TextHeader.txt";
     String path_BinaryHeader = "/home/ankush/Documents/Project/Seismic File X-ray/output/BinaryHeader.txt";
@@ -29,13 +28,34 @@ public class Controller {
     String path_TraceTitle = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceTitle.txt";
     String path_exe2 = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadData";
     String path_Segy = "/home/ankush/Documents/Project/Seismic File X-ray/Dump/PSTM_STACK_439_UTM.sgy";
+=======
+    //Add paths to required files
+    String path_exe = "";
+    String path_TextHeader = "";
+    String path_BinaryHeader = "";
+    String path_ExtendedTextHeader = "";
+    String path_TraceHeader = "";
+    String path_TraceData = "";
+    String path_TraceTitle = "";
+    String path_exe2 = "";
+    String path_Segy = "";
     
+>>>>>>> 29b011784624e4a767fcacf4a52251c4dd8cf72e
     public void onDisplay() throws IOException {
 
         traceHeader.clear();
         traceSample.clear();
         String a = tracespinner.getEditor().getText();
         String b = samplespinner.getEditor().getText();
+        System.out.println(a);
+        FileReader data = new FileReader(path_TraceData);
+        FileReader header = new FileReader(path_TraceHeader);
+        FileReader title = new FileReader(path_TraceTitle);
+        BufferedReader datardr = new BufferedReader(data);
+        BufferedReader  titlerdr= new BufferedReader(title);
+        LineNumberReader headerrdr = new LineNumberReader(header);
+
+
 
         if (new File(path_exe2).exists())
 
@@ -59,12 +79,6 @@ public class Controller {
         } else
             System.out.println(path_exe2 + " Doesn't Exists");
 
-        FileReader data = new FileReader(path_TraceData);
-        FileReader header = new FileReader(path_TraceHeader);
-        FileReader title = new FileReader(path_TraceTitle);
-        BufferedReader datardr = new BufferedReader(data);
-        BufferedReader  titlerdr= new BufferedReader(title);
-        LineNumberReader headerrdr = new LineNumberReader(header);
 
         traceSample.setStyle("-fx-font-family: monospace");
         traceSample.appendText(datardr.readLine().replaceAll(",", "\n"));
@@ -122,8 +136,6 @@ public class Controller {
                 }
                 int exitCode = p.waitFor();
                 System.out.println(path_exe + " EXITED WITH " + exitCode);
-
-                readbutton.setDisable(false);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -136,15 +148,13 @@ public class Controller {
 
     public void newFile() {
         File reader = new File(path_TextHeader);
-        if (reader.exists()) reader.delete();
+        reader.delete();
         reader = new File(path_BinaryHeader);
-        if (reader.exists()) reader.delete();
+        reader.delete();
         reader = new File(path_ExtendedTextHeader);
-        if (reader.exists()) reader.delete();
+        reader.delete();
         reader = new File(path_TraceHeader);
-        if (reader.exists()) reader.delete();
-        reader = new File(path_TraceData);
-        if (reader.exists()) reader.delete();
+        reader.delete();
         textHeader.clear();
         traceHeader.clear();
         binaryHeader.clear();
