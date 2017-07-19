@@ -75,10 +75,10 @@ public class Controller {
 
 
         String line, line2;
-        while (headerrdr.readLine() != null) {
+        while ((line = headerrdr.readLine()) != null) {
             if (headerrdr.getLineNumber() == l) {
 
-                line = headerrdr.readLine().replaceAll(",", "\n");
+                line = line.replaceAll(",", "\n");
                 String[] ary = line.split("\n");
 
                 traceHeader.setStyle("-fx-font-family: monospace");
