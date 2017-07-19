@@ -18,6 +18,7 @@ public class Controller {
     public TextArea textHeader;
     public TextArea traceSample;
     public Button readbutton;
+    public Button Display;
 
     //Add paths to required files
     String path_exe = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadHeaders";
@@ -28,7 +29,7 @@ public class Controller {
     String path_TraceData = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceData.csv";
     String path_TraceTitle = "/home/ankush/Documents/Project/Seismic File X-ray/output/TraceTitle.txt";
     String path_exe2 = "/home/ankush/Documents/Project/Seismic File X-ray/bin/ReadData";
-    String path_Segy = "/home/ankush/Documents/Project/Seismic File X-ray/Dump/PSTM_STACK_439_UTM.sgy";
+    String path_Segy ;
     
     public void onDisplay() throws IOException {
 
@@ -50,7 +51,7 @@ public class Controller {
                     System.out.print((char) value);
                 }
                 int exitCode = p.waitFor();
-                
+
                 System.out.println(path_exe2 + " EXITED WITH " + exitCode);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -113,7 +114,8 @@ public class Controller {
 
         {
             try {
-                ProcessBuilder pb = new ProcessBuilder(path_exe, opener(), path_TextHeader, path_BinaryHeader, path_ExtendedTextHeader, path_TraceHeader);
+                path_Segy = opener();
+                ProcessBuilder pb = new ProcessBuilder(path_exe, path_Segy, path_TextHeader, path_BinaryHeader, path_ExtendedTextHeader, path_TraceHeader);
                 pb.redirectError();
                 Process p = pb.start();
                 InputStream is = p.getInputStream();
@@ -194,6 +196,7 @@ public class Controller {
                 EXTtrace.appendText("No Extended Textual File Header Found");
 
             readbutton.setDisable(true);
+            Display.setDisable(false);
         }
         catch (IOException e) {
             e.printStackTrace();

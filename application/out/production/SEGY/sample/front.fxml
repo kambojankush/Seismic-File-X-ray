@@ -42,7 +42,7 @@
                     <content>
                         <AnchorPane focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="413.0" prefWidth="671.0">
                             <children>
-                                <Button fx:id="Display" layoutX="410.0" layoutY="2.0" mnemonicParsing="false" onAction="#onDisplay" text="Display" />
+                                <Button fx:id="Display" disable="true" layoutX="410.0" layoutY="2.0" mnemonicParsing="false" onAction="#onDisplay" text="Display" />
                                 <TextArea fx:id="traceHeader" promptText="Trace Header" editable="false" layoutX="81.0" layoutY="27.0" prefHeight="360.0" prefWidth="466.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="234.0" AnchorPane.topAnchor="27.0" />
                                 <TextArea fx:id="traceSample" promptText="Trace Sample" editable="false" layoutX="465.0" layoutY="27.0" prefHeight="360.0" prefWidth="235.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="465.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
                                 <Spinner fx:id="tracespinner" editable="true" initialValue="0" layoutX="80.0" layoutY="2.0" max="999999" min="0" prefHeight="25.0" prefWidth="80.0" />
