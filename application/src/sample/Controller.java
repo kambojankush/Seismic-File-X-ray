@@ -151,6 +151,7 @@ public class Controller {
         textHeader.clear();
         traceHeader.clear();
         binaryHeader.clear();
+        traceSample.clear();
         EXTtrace.clear();
 
         execute();
